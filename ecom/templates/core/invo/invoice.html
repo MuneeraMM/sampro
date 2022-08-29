@@ -1,0 +1,176 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>invoice</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'invoice.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css' %}" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <!-- <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>Example 2</title>
+        <link rel="stylesheet" href="style.css" media="all" />
+      </head>
+      <body> -->
+        <header class="clearfix">
+          <div id="logo">
+            <h2>ECO</h2>
+            <!-- <img src="logo.png"> -->
+          </div>
+          <div id="company">
+            <!-- <h4 class="name">Invoice Id : {{payment_status.order_id}}</h4> -->
+            <div>Invoice Id : {{payment_status.order_id}}</div>
+            <div>Date: {{order.ordered_date}}</div>
+            <!-- <div>(602) 519-0450</div> -->
+            <!-- <div><a href="mailto:company@example.com">company@example.com</a></div> -->
+          </div>
+          </div>
+        </header>
+        <main>
+          <div id="details" class="clearfix">
+            <div id="client">
+                <div>Ecomm</div>
+                <div>Shalini Nagar, Konhapur</div>
+                <div>Maharashtra, India</div>
+
+                
+                
+
+              <!-- <div class="to"></div> -->
+              <!-- <h2 class="name">John Doe</h2>
+              <div class="address">796 Silver Harbour, TX 79273, US</div>
+              <div class="email"><a href="mailto:john@example.com">john@example.com</a></div> -->
+            </div>
+            <div id="invoice">
+              <!-- <h1>INVOICE 3-2-1</h1> -->
+              <div>{{order.user.username}}</div>
+              <div>{{checkout_address.street_address}}</div>
+              <div>{{checkout_address.apartment_address}}</div>
+              <div>{{checkout_address.country}} <br/> {{checkout_address.zip_code}}</div>
+              <div>{{payment_status.contact}}</div>
+            </div>
+          </div>
+                <!--  -->
+                <table border="0" cellspacing="0" cellpadding="0" >
+                    <thead>
+                      <tr>
+                        <!-- <th class="no">#</th> -->
+                        <th class="desc">Payment Method</th>
+                        <!-- <th class="unit">UNIT PRICE</th> -->
+                        <!-- <th class="qty">QUANTITY</th> -->
+                        <th class="total">check #</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <!-- <td class="no">01</td> -->
+                        <td class="desc">{{payment_status.method}}</td>
+                        <!-- <td class="unit">$40.00</td> -->
+                        <!-- <td class="qty">30</td> -->
+                        <td class="total">{{payment_status.id}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+                <!--  -->
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                    <!-- <th class="no">#</th> -->
+                    <th class="desc">Item</th>
+                    <!-- <th class="unit">UNIT PRICE</th> -->
+                    <th class="qty">Qnty</th>
+                    <th class="price">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in order.items.all %}
+                        <tr>
+                            <!-- <td class="no">01</td> -->
+                            <td class="desc">{{item.product.name}}</td>
+                            <!-- <td class="unit">$40.00</td> -->
+                            <td class="qty">{{item.quantity}}</td>
+                            <td class="price">Rs. {{item.get_total_item_price}}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td class="price" style="font-weight:bolder;">Total: Rs. {{order.get_total_price}}</td>
+                  </tr>
+                <!-- <tr>
+                    <td class="no">02</td>
+                    <td class="desc"><h3>Website Development</h3>Developing a Content Management System-based Website</td>
+                    <td class="unit">$40.00</td>
+                    <td class="qty">80</td> -->
+                    <!-- <td class="total">$3,200.00</td>
+                </tr>
+                <tr>
+                    <td class="no">03</td>
+                    <td class="desc"><h3>Search Engines Optimization</h3>Optimize the site for search engines (SEO)</td>
+                    <td class="unit">$40.00</td>
+                    <td class="qty">20</td>
+                    <td class="total">$800.00</td>
+                </tr> --> 
+                </tbody>
+                <!-- <tfoot> -->
+                <!-- <tr> -->
+                  <!-- <td style="font-weight:bolder;float: right;text-align:right;">Total: Rs. {{order.get_total_price}}</td> -->
+                    <!-- <td colspan="2"></td> -->
+                    <!-- <td colspan="2" style="font-weight:bolder;float: right;text-align:right;">Total:  </td>
+                    <td colspan="3" style="font-weight:bolder;">Rs. 000{{order.get_total_price}}</td> -->
+
+                    <!-- <td>$5,200.00</td> -->
+                <!-- </tr> -->
+                <!-- <tr>
+                    <td colspan="2"></td>
+                    <td colspan="2">TAX 25%</td>
+                    <td>$1,300.00</td>
+                </tr> -->
+                <!-- <tr>
+                    <td colspan="2"></td>
+                    <td colspan="2">GRAND TOTAL</td>
+                    <td>$6,500.00</td>
+                </tr> -->
+                </tfoot>
+            </table>
+          <div id="thanks" style="margin-top:20px;">Thank you!</div>
+          <!-- <div id="notices">
+            <div>NOTICE:</div>
+            <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+          </div> -->
+        </main>
+        <!-- <footer>
+          Invoice was created on a computer and is valid without the signature and seal.
+        </footer> -->
+      <div style="text-align:center;margin-top:50px;"><button>Print</button></div>
+      
+      <script>
+        document.querySelector("button").addEventListener("click" ,function(){
+          window.print();
+        })
+      </script>
+   
+
+
+
+
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{% static 'https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js' %}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="{% static 'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' %}" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js' %}" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
